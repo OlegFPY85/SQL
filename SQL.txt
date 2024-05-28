@@ -1,0 +1,62 @@
+-- Создание таблицы "Исполнитель"
+CREATE TABLE Executor (
+    executor_id INT PRIMARY KEY,
+    executor_name VARCHAR(255)
+);
+
+-- Создание таблицы "Жанр"
+CREATE TABLE Genre (
+    genre_id INT PRIMARY KEY,
+    genre_name VARCHAR(255)
+);
+
+-- Создание таблицы "Альбом"
+CREATE TABLE Album (
+    album_id INT PRIMARY KEY,
+    album_name VARCHAR(255)
+);
+
+-- Создание таблицы "Трек"
+CREATE TABLE Track (
+    track_id INT PRIMARY KEY,
+    track_name VARCHAR(255),
+    album_id INT,
+    FOREIGN KEY (album_id) REFERENCES Album(album_id)
+);
+
+-- Создание таблицы "Сборник"
+CREATE TABLE Collection (
+    collection_id INT PRIMARY KEY,
+    collection_name VARCHAR(255),
+    release_year INT
+);
+
+-- Создание таблицы для связи "Исполнитель-Жанр"
+CREATE TABLE ExecutorGenre (
+    id SERIAL,
+    executor_id INT,
+    genre_id INT,
+    PRIMARY KEY(executor_id, genre_id),
+    FOREIGN KEY (executor_id) REFERENCES Executor(executor_id),
+    FOREIGN KEY (genre_id) REFERENCES Genre(genre_id)
+);
+
+-- Создание таблицы для связи "Исполнитель-Альбом"
+CREATE TABLE ExecutorAlbum (
+    id SERIAL,
+    executor_id INT,
+    album_id INT,
+    PRIMARY KEY(executor_id, album_id),
+    FOREIGN KEY (executor_id) REFERENCES Executor(executor_id),
+    FOREIGN KEY (album_id) REFERENCES Album(album_id)
+);
+
+-- Создание таблицы для связи "Трек-Сборник"
+CREATE TABLE TrackCollection (
+    id SERIAL,
+    track_id INT,
+    collection_id INT,
+    PRIMARY KEY(track_id, collection_id),
+    FOREIGN KEY (track_id) REFERENCES Track(track_id),
+    FOREIGN KEY (collection_id) REFERENCES Collection(collection_id)
+);
