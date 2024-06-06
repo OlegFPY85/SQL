@@ -7,19 +7,21 @@ CREATE TABLE Executor (
 -- Создание таблицы "Жанр"
 CREATE TABLE Genre (
     genre_id INT PRIMARY KEY,
-    genre_name VARCHAR(255)
+    genre_name VARCHAR(50)
 );
 
 -- Создание таблицы "Альбом"
 CREATE TABLE Album (
     album_id INT PRIMARY KEY,
-    album_name VARCHAR(255)
+    album_name VARCHAR(50),
+    album_release_year INT(4)
 );
 
 -- Создание таблицы "Трек"
 CREATE TABLE Track (
     track_id INT PRIMARY KEY,
-    track_name VARCHAR(255),
+    track_name VARCHAR(80),
+    track_duration INT(10),
     album_id INT,
     FOREIGN KEY (album_id) REFERENCES Album(album_id)
 );
@@ -27,8 +29,8 @@ CREATE TABLE Track (
 -- Создание таблицы "Сборник"
 CREATE TABLE Collection (
     collection_id INT PRIMARY KEY,
-    collection_name VARCHAR(255),
-    release_year INT
+    collection_name VARCHAR(50),
+    collection_release_year INT(4)
 );
 
 -- Создание таблицы для связи "Исполнитель-Жанр"
